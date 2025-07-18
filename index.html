@@ -27,69 +27,24 @@
 
 	<div>
 		<h3>plastic bag simulation</h3>
+		<a href="https://demonic-father.surge.sh/">live demo</a><br>
 		<a href="https://codeberg.org/rohans0/plastic-bag-simulation">source code</a>
-		<div class="emscripten" hidden="" id="status">Exception thrown, see JavaScript console</div>
-		<div class="emscripten"><progress hidden="" id="progress" max="100" value="0"></progress></div>
-		<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1" width="800" height="450"></canvas>
-		<script>
-			var statusElement = document.getElementById("status"),
-				progressElement = document.getElementById("progress"),
-				spinnerElement = document.getElementById("spinner"),
-				Module = {
-					print: function () {
-						var e = document.getElementById("output");
-						return e && (e.value = ""), (...t) => {
-							var n = t.join(" ");
-							console.log(n), e && (e.value += n + "\n", e.scrollTop = e.scrollHeight)
-						}
-					}(),
-					canvas: (() => {
-						var e = document.getElementById("canvas");
-						return e.addEventListener("webglcontextlost", (e => {
-							alert("WebGL context lost. You will need to reload the page."), e.preventDefault()
-						}), !1), e
-					})(),
-					setStatus: e => {
-						if (Module.setStatus.last ??= {
-							time: Date.now(),
-							text: ""
-						}, e !== Module.setStatus.last.text) {
-							var t = e.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/),
-								n = Date.now();
-							t && n - Module.setStatus.last.time < 30 || (Module.setStatus.last.time = n, Module.setStatus.last.text = e, t ? (e = t[1], progressElement.value = 100 * parseInt(t[2]), progressElement.max = 100 * parseInt(t[4]), progressElement.hidden = !1, spinnerElement.hidden = !1) : (progressElement.value = null, progressElement.max = null, progressElement.hidden = !0, e || (spinnerElement.style.display = "none")), statusElement.innerHTML = e)
-						}
-					},
-					totalDependencies: 0,
-					monitorRunDependencies: e => {
-						this.totalDependencies = Math.max(this.totalDependencies, e), Module.setStatus(e ? "Preparing... (" + (this.totalDependencies - e) + "/" + this.totalDependencies + ")" : "All downloads complete.")
-					}
-				};
-			Module.setStatus("Downloading..."), window.onerror = e => {
-				Module.setStatus("Exception thrown, see JavaScript console"), spinnerElement.style.display = "none", Module.setStatus = e => {
-					e && console.error("[post-exception status] " + e)
-				}
-			}
-		</script>
-		<script async="" src="plasticbag/game.js"></script>
-		<!-- <script>document.getElementById(canvas)</script> -->
 		<p>
 			Click and drag the red circles to mess with it. I used raylib to make this, it's essentially a cloth simulation, and I used verlet integration for better accuracy.
 		</p>
 	</div>
 	<br>
-	<!-- <div> -->
-	<!-- 	<h3>flag simulation (of any image)</h3> -->
-	<!-- 	<a href="">source code</a> -->
-	<!-- 	<p> -->
-	<!-- 		This also uses raylib -->
-	<!-- 	</p> -->
-	<!-- </div> -->
-	<!-- <br> -->
-	<!-- <div> -->
-	<!-- 	<h3>path finding demo</h3> -->
-	<!-- 	<a href="">source code</a> -->
-	<!-- </div> -->
-	<!-- <br> -->
+	<div>
+		<h3>flag simulation</h3>
+		<a href="https://codeberg.org/rohans0/3d-flag">source code</a>
+		<video width="640" height="360" controls>
+		  <source src="flag.mp4" type="video/mp4">
+		  Your browser does not support the video tag.
+		</video>
+		<p>
+			This is also a cloth simulation using raylib
+		</p>
+	</div>
 	<div>
 		<h3>unity game</h3>
 		<a href="https://stucktogether.itch.io/stuck-together">itch.io page</a><br>
@@ -99,9 +54,17 @@
 		</p>
 	</div>
 	<br>
-	<!-- <div> -->
-	<!-- 	<h3>animation system within game engine</h3> -->
-	<!-- </div> -->
+	<div>
+		<h3>animation system within game engine</h3>
+
+		<a href="https://rynplynch.github.io/CSS452-Team5-FinalProject/">live web demo</a><br>
+		<a href="https://github.com/rynplynch/CSS452-Team5-FinalProject">source code</a>
+		<p>
+			Group project and final project for game engine development class, an animation system added to a custom WebGL game engine (a majority of the class was understanding/coding parts within the engine rather than making it entirely).<br><br>
+
+			It linearly interpolates between keyframes of object position, size, rotation, and	color, and was inspired by Godot's animation system which allows linear interpretation (along with other types like frame-by-frame) of most properties of objects by choosing key frames at times.
+		</p>
+	</div>
 	<br>
 	<div>
 	</div>
@@ -111,7 +74,6 @@
 	<span>...more stuff at<br>
 	<a href="https://github.com/rohans0/">github</a><br>
 	<a href="https://codeberg.org/rohans0">codeberg</a><br>
-	(I'm gonna keep adding things from there to here to around 7/18)</span>
 	</center>
 </body>
 </html>
